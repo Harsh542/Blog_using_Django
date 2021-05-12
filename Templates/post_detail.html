@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+{% load crispy_forms_tags %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Post</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+</head>
+<body>
+ <nav class="navbar is-success">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item"><strong>Post Detail</strong></a>
+                <a href="{% url 'home' %}"  id="Post"><button style="color:green;font-size:20px;margin:10px 0px 0px 1100px;padding:0px 10px;">Home</button></a>
+            </div>
+        </nav>
+   <section class="section">
+            <div class="container">
+                <h1 class="title">{{post.title}}</h1>
+
+    <small>{{post.date}}</small>
+
+    <p style="color:blue;">{{post.intro}}</p>
+
+    <p>{{post.body}}</p>
+    <hr>
+
+    <h2 class="subtitle">Comments</h2>
+{% for comment in post.comments.all %}
+                <article class="media">
+            <div class="media-content">
+                <div class="content">
+                    <p>
+                        <strong>{{ comment.name }}</strong><br>
+                        <small>{{ comment.date }}</small>
+                        <br>
+                        <span style="color:green;">{{ comment.body }}</span><br>
+                        <a href="{% url 'delete' comment.email post.slug %}" id="del" style="color:red;">Delete</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+                {% empty %}
+                <div class="notification">
+            <p>No comments yet!</p>
+        </div>
+    {% endfor %}
+
+
+
+    <hr>
+
+    <h2 class="subtitle">Add comment</h2>
+
+    <form method="post" action="">
+        {% csrf_token %}
+
+        {{ form | crispy }}
+
+        <div class="field">
+            <div class="control">
+                <button class="button is-success" style="margin-top:5px;">Submit</button>
+            </div>
+        </div>
+    </form>
+            </div>
+        </section>
+<script>
+    var Delete = document.getElementById("del")
+    console.log(Delete.value)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Blog</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    </head>
+
+    <body>
+        <nav class="navbar is-success">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item"><strong>Harsh Blogs</strong></a>
+                <a href="{% url 'Add_Post' %}"  id="Post"><button style="color:green;font-size:20px;margin:10px 0px 0px 1100px;padding:0px 10px;">Post</button></a>
+            </div>
+        </nav>
+
+        <section class="section">
+            <div class="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </section>
+    </body>
+</html>
